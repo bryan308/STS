@@ -1,0 +1,4 @@
+
+// Log in for admin
+username: admin
+password: admin1
