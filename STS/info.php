@@ -41,6 +41,7 @@ if(isset($_GET['ID'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/buttons.css">
     <title>Students Transcripts System</title>
 </head>
 <body>
@@ -63,23 +64,28 @@ if(isset($_GET['ID'])) {
                     </div>
                 </li>
                 <li>
-                    <a class="s-sidebar__nav-link" href="#0">
+                    <a href="#0">
                         <i class="fa fa-home"></i><em> Home</em>
                     </a>
                 </li>
                 <li>
-                    <a class="s-sidebar__nav-link" href="index.php" target="_self">
+                    <a href="index.php" target="_self">
                         <i class="fa fa-list"></i><em> Students List</em>
                     </a>
                 </li>
                 <li>
-                <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
+                    <a href="settings.php" target="_self">
+                        <i class="fa fa-cogs"></i><em> Settings</em>
+                    </a>
+                </li>
+                <li>
+                    <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
                         <a href="login.php">Log out</a>
-                        <?php } elseif(isset($_SESSION['Access']) && $_SESSION['Access'] == "guest") { ?>
+                    <?php } elseif(isset($_SESSION['Access']) && $_SESSION['Access'] == "guest") { ?>
                         <a href="login.php">Log out</a>
-                        <?php } else { ?>
-                            <a href="login.php">Log In</a>
-                            <?php } ?>
+                    <?php } else { ?>
+                        <a href="login.php">Log In</a>
+                    <?php } ?>
                 </li>
             </ul>
         </div>
@@ -98,51 +104,32 @@ if(isset($_GET['ID'])) {
                         <button class="btn"><a href="edit.php?ID=<?php echo $row['id']; ?>">Edit</a></button>
                     </div>
                     <div class="table-container">
-                        <table>
+                        <table class="table">
                             <tr>
                                 <th class="th" colspan="4">LEARNER INFORMATION</th>
                             </tr>
                             <tr>
-                                <td colspan="1">Learner Reference Number (LRN):</td>
-                                <td class="info value" colspan="3">
-                                    <div>
-                                        <?php echo $row['lrn'] ?>
-                                    </div>
+                                <td colspan="1">LAST NAME: 
+                                    <?php echo $row['last_name'] ?>
+                                </td>
+                                <td colspan="1">FIRST NAME: 
+                                    <?php echo $row['first_name'] ?>
+                                </td>
+                                <td colspan="1">NAME EXT. (Jr, I, II): 
+                                    <?php echo $row['name_ext'] ?>
+                                </td>
+                                <td colspan="1">MIDDLE NAME: 
+                                    <?php echo $row['middle_name'] ?>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="1">LAST NAME:</td>
-                                <td class="info value">
-                                    <div><?php echo $row['last_name'] ?></div>
+                                <td colspan="2">Learner Reference Number (LRN):
+                                    <?php echo $row['lrn'] ?>
                                 </td>
-                                <td colspan="1">FIRST NAME:</td>
-                                <td class="info value">
-                                    <div><?php echo $row['first_name'] ?></div>
+                                <td colspan="1">Birthdate (mm/dd/yyyy): 
+                                    <?php echo $row['birth_date'] ?>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td colspan="1">NAME EXT. (Jr, I, II):</td>
-                                <td class="info value" colspan="1">
-                                    <div>
-                                        <?php echo $row['name_ext'] ?>
-                                    </div>
-                                </td>
-                                <td colspan="1">MIDDLE NAME:</td>
-                                <td class="info value" colspan="1">
-                                    <div>
-                                        <?php echo $row['middle_name'] ?>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="1">Birthdate (mm/dd/yyyy):</td>
-                                <td class="info value" colspan="1">
-                                    <div>
-                                        <?php echo $row['birth_date'] ?>
-                                    </div>
-                                </td>
-                                <td colspan="1">Gender:</td>
-                                <td class="info value" colspan="1">
+                                <td colspan="1">Gender: 
                                     <?php if ($row['gender'] === 'Male'): ?>
                                         <span>Male</span>
                                     <?php else: ?>
@@ -151,7 +138,7 @@ if(isset($_GET['ID'])) {
                                 </td>
                             </tr>
                         </table>
-                        <table>
+                        <table class="table">
                             <tr>
                                 <th class="th" colspan="4">ELIGIBILITY FOR JHS ENROLMENT</th>
                             </tr>

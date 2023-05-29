@@ -71,21 +71,17 @@ if(isset($_POST['login'])) {
 </div> -->
 
 <div class="form-wrapper">
-
     <div class="main">  	
         <input type="checkbox" id="chk" aria-hidden="true">
-
-			<div class="login">
-				<form class="form" method="post">
-					<label class="login-text" for="chk" aria-hidden="true">Log in</label>
-                        <label class="label" for="username">Username:</label>
+		<div class="login">
+			<form class="form" method="post">
+					<label class="login-text" for="chk" aria-hidden="true">Log in</label>                        <label class="label" for="username">Username:</label>
                         <input class="input" required="" name="username" id="username" type="text">
-                        <label class="label" for="password">Password:</label>
+                    <label class="label" for="password">Password:</label>
                         <input class="input" required="" name="password" id="password" type="password">
                     <button value="login" name="login" type="submit">Log In</button>
-				</form>
-			</div>
-
+			</form>
+		</div>
         <div class="register">
 				<form class="form">
 					<label class="register-text" for="chk" aria-hidden="true">Register</label>

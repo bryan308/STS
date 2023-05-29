@@ -1,4 +1,5 @@
 <?php
+
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -31,6 +32,7 @@ if ($search != '') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/buttons.css">
     <title>Students Transcripts System</title>
 </head>
 <body>
@@ -53,23 +55,28 @@ if ($search != '') {
                     </div>
                 </li>
                 <li>
-                    <a class="s-sidebar__nav-link" href="#0">
+                    <a href="#0">
                         <i class="fa fa-home"></i><em> Home</em>
                     </a>
                 </li>
                 <li>
-                    <a class="s-sidebar__nav-link" href="index.php" target="_self">
+                    <a href="index.php" target="_self">
                         <i class="fa fa-list"></i><em> Students List</em>
                     </a>
                 </li>
                 <li>
-                <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
+                    <a href="settings.php" target="_self">
+                        <i class="fa fa-cogs"></i><em> Settings</em>
+                    </a>
+                </li>
+                <li>
+                    <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
                         <a href="login.php">Log out</a>
-                        <?php } elseif(isset($_SESSION['Access']) && $_SESSION['Access'] == "guest") { ?>
+                    <?php } elseif(isset($_SESSION['Access']) && $_SESSION['Access'] == "guest") { ?>
                         <a href="login.php">Log out</a>
-                        <?php } else { ?>
-                            <a href="login.php">Log In</a>
-                            <?php } ?>
+                    <?php } else { ?>
+                        <a href="login.php">Log In</a>
+                    <?php } ?>
                 </li>
             </ul>
         </div>
@@ -86,7 +93,7 @@ if ($search != '') {
                     <div class="table-controls">
                         <div class="search-tab">
                             <form action="result.php" method="get">
-                                <input type="text" name="search" id="searchstu" autocomplete="off" minlength="3" maxlength="20" required value="<?php echo $_GET['search'] ?>">
+                                <input class="search-bar" type="text" name="search" id="searchstu" autocomplete="off" minlength="3" maxlength="20" required value="<?php echo $_GET['search'] ?>">
                                 <button class="btn" type="submit">Search</button>
                                 <button class="btn">
                                     <a href="index.php"><i class="fa fa-arrow-left"></i> Back</a>
@@ -101,7 +108,7 @@ if ($search != '') {
                         </div>
                     </div>
                     <div class="table-container">
-                    <table>
+                    <table class="table">
                         <tr>
                             <th class="th hlrn">LRN</th>
                             <th class="th hlname">Last name</th>

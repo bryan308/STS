@@ -25,6 +25,7 @@ $row = $students->fetch_assoc();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/buttons.css">
     <title>Students Transcripts System</title>
 </head>
 <body>
@@ -57,6 +58,11 @@ $row = $students->fetch_assoc();
                 </a>
             </li>
             <li>
+                <a href="settings.php" target="_self">
+                    <i class="fa fa-cogs"></i><em> Settings</em>
+                </a>
+            </li>
+            <li>
                 <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
                     <a href="login.php">Log out</a>
                 <?php } elseif(isset($_SESSION['Access']) && $_SESSION['Access'] == "guest") { ?>
@@ -70,7 +76,7 @@ $row = $students->fetch_assoc();
         <div id="page-content-wrapper">
             <div class="container-fluid">
                     <button class="menu-btn" id="menu-toggle">
-                    <span><i class="fa fa-bars"></i></span>
+                        <span><i class="fa fa-bars"></i></span>
                     </button>
                 <div class="section-header">
                     <h1>Students List <i class="fa fa-list"></i></h1>
@@ -80,50 +86,53 @@ $row = $students->fetch_assoc();
                 <div class="table-controls">
                 <div class="search-tab">
                     <form action="result.php" method="get">
-                        <input type="text" name="search" id="searchstu" autocomplete="off" minlength="3" maxlength="20" required>
-                        <button class="btn" type="submit">Search</button>
+                        <input class="search-bar" type="text" name="search" id="searchstu" autocomplete="off" minlength="3" maxlength="20" required>
+                        <button class="search" type="submit">Search</button>
                     </form>
                 </div>
                     <div class="table-con-action">
                     <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
-                        <button class="btn"><a class="add" href="add.php">Add <i class="fa fa-plus"></i></a></button>
+                        <button class="btn">
+                            <a class="add" href="add.php">Add <i class="fa fa-plus"></i></a>
+                        </button>
                     <?php } ?>
                     </div>
                         </div>
                         <div class="table-container">
-                        <table>
-                            <tr class="table-headers">
-                                <th class="th hlrn">LRN</th>
-                                <th class="th hlname">Last name</th>
-                                <th class="th hfname">First name</th>
-                                <th class="th hmname">Middle name</th>
-                                <th class="th hgender">Gender</th>
-                                <?php if (isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
-                                    <th class="th hdetails">Details</th>
-                                <?php } ?>
-                            </tr>
-                            <?php do { ?>
-                                <tr>
-                                    <td class="td rlrn"><?php echo $row['lrn']; ?></td>
-                                    <td class="td rlname"><?php echo $row['last_name']; ?></td>
-                                    <td class="td rfname"><?php echo $row['first_name']; ?></td>
-                                    <td class="td rmname"><?php echo $row['middle_name']; ?></td>
-                                    <td class="td rgender"><?php echo $row['gender']; ?></td>
+                            <table class="table">
+                                <tr class="table-headers">
+                                    <th class="th hlrn">LRN</th>
+                                    <th class="th hlname">Last name</th>
+                                    <th class="th hfname">First name</th>
+                                    <th class="th hfname">Name Ext.</th>
+                                    <th class="th hmname">Middle name</th>
+                                    <th class="th hgender">Gender</th>
                                     <?php if (isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
-                                        <td class="td rdetails">
-                                            <button class="btn-view">
-                                            <a href="info.php?ID=<?php echo $row['id']; ?>">View</a>
-                                            </button>
-                                        </td>
+                                        <th class="th hdetails">Details</th>
                                     <?php } ?>
                                 </tr>
-                            <?php } while ($row = $students->fetch_assoc()) ?>
-                        </table>
-                    </div>
+                                <?php do { ?>
+                                    <tr class="row-list">
+                                        <td class="td rlrn"><?php echo $row['lrn']; ?></td>
+                                        <td class="td rlname"><?php echo $row['last_name']; ?></td>
+                                        <td class="td rfname"><?php echo $row['first_name']; ?></td>
+                                        <td class="td rfname"><?php echo $row['name_ext']; ?></td>
+                                        <td class="td rmname"><?php echo $row['middle_name']; ?></td>
+                                        <td class="td rgender"><?php echo $row['gender']; ?></td>
+                                        <?php if (isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
+                                            <td class="td view rdetails">
+                                                <a href="info.php?ID=<?php echo $row['id']; ?>">View</a>
+                                            </td>
+                                        <?php } ?>
+                                    </tr>
+                                <?php } while ($row = $students->fetch_assoc()) ?>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 </body>
+<script src="js/theme.js"></script>
 <script src="js/script.js"></script>
 </html>

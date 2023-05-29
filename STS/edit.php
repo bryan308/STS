@@ -42,6 +42,7 @@ if(isset($_POST['submit'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/buttons.css">
     <title>Students Transcripts System</title>
 </head>
 
@@ -50,7 +51,7 @@ if(isset($_POST['submit'])) {
 <div id="wrapper">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
-            <li class="sidebar-brand">
+        <li class="sidebar-brand">
                 <div class="show-access">
                     <?php
                     if (isset($_SESSION['UserLogin'])) {
@@ -66,20 +67,25 @@ if(isset($_POST['submit'])) {
                 </div>
             </li>
             <li>
-                <a class="s-sidebar__nav-link" href="#0">
+                <a href="#0">
                     <i class="fa fa-home"></i><em> Home</em>
                 </a>
             </li>
             <li>
-                <a class="s-sidebar__nav-link" href="index.php" target="_self">
+                <a href="index.php" target="_self">
                     <i class="fa fa-list"></i><em> Students List</em>
                 </a>
             </li>
             <li>
+                <a href="settings.php" target="_self">
+                    <i class="fa fa-cogs"></i><em> Settings</em>
+                </a>
+            </li>
+            <li>
                 <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
-                    <a href="logout.php">Log out</a>
+                    <a href="login.php">Log out</a>
                 <?php } elseif(isset($_SESSION['Access']) && $_SESSION['Access'] == "guest") { ?>
-                    <a href="logout.php">Log out</a>
+                    <a href="login.php">Log out</a>
                 <?php } else { ?>
                     <a href="login.php">Log In</a>
                 <?php } ?>
@@ -98,7 +104,7 @@ if(isset($_POST['submit'])) {
                 <div class="main-content">
                 
                     <div class="table-controls">
-                    <button class="btn delete" onclick="showDeleteConfirmation('<?php echo $row['id']; ?>')">DELETE</button>
+                    <button class="delete" onclick="showDeleteConfirmation('<?php echo $row['id']; ?>')">DELETE</button>
                     </div>
                 <div class="table-container">
                     
@@ -114,63 +120,62 @@ if(isset($_POST['submit'])) {
                         <p>Are you sure you want to delete this student's record? This action cannot be undone. <i class='fa fa-exclamation-triangle' style='color: orange;'></i></p>
                         
                         <div class="btn-wrapper">
-                            <button class="btn btn-primary" onclick="deleteItem('<?php echo $row['id']; ?>')">Delete</button>
-                            <button class="btn btn-secondary" onclick="hideDeleteConfirmation()">Cancel</button>
+                            <button class="delete" onclick="deleteItem('<?php echo $row['id']; ?>')">Delete</button>
+                            <button class="cancel" onclick="hideDeleteConfirmation()">Cancel</button>
                         </div>
                     
                     </div>
                     
                     <form action="" method="post">
                         <button class="btn update" type="subimt" name="submit">UPDATE</button>
-                        <table>
+                        <table class="table">
                             <tr>
                                 <th class="th" colspan="4">LEARNER INFORMATION</th>
                             </tr>
                             <tr>
-                                <td colspan="2">Learner Reference Number (LRN):</td>
-                                <td colspan="2"><input type="text" name="lrn" id="search" value="<?php echo $row['lrn'] ?>" maxlength="12" minlength="12" autocomplete="off"></td>
+                                <td colspan="1">LAST NAME:
+                                    <input type="text" name="last_name" id="" value="<?php echo $row['last_name'] ?>" autocomplete="off">
+                                </td>
+                                <td colspan="1">FIRST NAME:
+                                    <input type="text" name="first_name" id="" value="<?php echo $row['first_name'] ?>" autocomplete="off">
+                                </td>
+                                <td colspan="1">NAME EXT. (Jr, I, II):
+                                    <input type="text" name="name_ext" id="" value="<?php echo $row['name_ext'] ?>" autocomplete="off">
+                                </td>
+                                <td colspan="1">MIDDLE NAME:
+                                    <input type="text" name="middle_name" id="" value="<?php echo $row['middle_name'] ?>" autocomplete="off">
+                                </td>
                             </tr>
                             <tr>
-                                <td colspan="1">LAST NAME:</td>
-                                <td colspan="1"><input type="text" name="last_name" id="search" value="<?php echo $row['last_name'] ?>" autocomplete="off"></td>
-                                <td colspan="1">FIRST NAME:</td>
-                                <td colspan="1"><input type="text" name="first_name" id="search" value="<?php echo $row['first_name'] ?>" autocomplete="off"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="1">NAME EXT. (Jr, I, II):</td>
-                                <td colspan="1"><input type="text" name="name_ext" id="search" value="<?php echo $row['name_ext'] ?>" autocomplete="off"></td>
-                                <td colspan="1">MIDDLE NAME:</td>
-                                <td colspan="1"><input type="text" name="middle_name" id="search" value="<?php echo $row['middle_name'] ?>" autocomplete="off"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="1">Birthdate (mm/dd/yyyy):</td>
-                                <td colspan="1">
-                                    <input type="text" name="birth_date" id="search" value="<?php echo $row['birth_date'] ?>" maxlength="10" autocomplete="off" oninput="validateBirthdate(this)">
+                                <td colspan="2">Learner Reference Number (LRN):
+                                    <input type="text" name="lrn" id="" value="<?php echo $row['lrn'] ?>" maxlength="12" minlength="12" autocomplete="off">
+                                </td>
+                                <td colspan="1">Birthdate (mm/dd/yyyy):
+                                    <input type="text" name="birth_date" id="" value="<?php echo $row['birth_date'] ?>" maxlength="10" autocomplete="off" oninput="validateBirthdate(this)">
                                     <span id="birthdateError" style="color: red;"></span>
                                 </td>
-                                <td colspan="1">Gender:</td>
-                                <td colspan="1">
-                                <select name="gender" id="gender">
-                                    <option value="Male" <?php if ($row['gender'] === 'Male') echo 'selected'; ?>>Male</option>
-                                    <option value="Female" <?php if ($row['gender'] === 'Female') echo 'selected'; ?>>Female</option>
-                                </select>
+                                <td colspan="1">Gender: 
+                                    <select name="gender" id="gender">
+                                        <option value="Male" <?php if ($row['gender'] === 'Male') echo 'selected'; ?>>Male</option>
+                                        <option value="Female" <?php if ($row['gender'] === 'Female') echo 'selected'; ?>>Female</option>
+                                    </select>
                                 </td>
                             </tr>
                         </table>
-                        <table>
+                        <table class="table">
                             <tr>
                                 <th class="th" colspan="4">ELIGIBILITY FOR JHS ENROLMENT</th>
                             </tr>
                             <tr>
                                 <td>Elementary School Completer:
-                                <input type="checkbox" name="elementary_completer">
+                                    <input class="input" type="checkbox" name="elementary_completer">
                                 </td>
                                 <td colspan="1">General Average:</td>
-                                <td colspan="2"><input type="text" name="" value="" readonly autocomplete="off"></td>
+                                <td colspan="2"><input class="input" type="text" name="" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <td>Name of Elementary School:</td>
-                                <td colspan="3">LA FUENTE ELEM. SCHOOL</td>
+                                <td colspan="3"></td>
                             </tr>
                             <tr>
                                 <td>School ID:</td>
