@@ -11,7 +11,7 @@
     display: inline-block;
     width: 5em;
     height: 2em;
-    margin: 0 5px;
+    margin: 5px;
     line-height: 1.5em;
     position: relative;
     overflow: hidden;
@@ -57,9 +57,9 @@
     color: var(--delete);
     font-family: inherit;
     display: inline-block;
-    width: 5em;
+    width: 6em;
     height: 2em;
-    margin: 0 5px;
+    margin: 5px 5px 0 5px;
     line-height: 1.5em;
     position: relative;
     overflow: hidden;
@@ -152,8 +152,9 @@
     color: var(--update);
     font-family: inherit;
     display: inline-block;
-    width: 5em;
+    width: 6em;
     height: 2em;
+    margin: 0 5px;
     line-height: 1.5em;
     position: relative;
     overflow: hidden;

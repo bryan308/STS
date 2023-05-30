@@ -22,8 +22,7 @@ $row = $students->fetch_assoc();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/buttons.css">
     <title>Students Transcripts System</title>
@@ -32,8 +31,9 @@ $row = $students->fetch_assoc();
 <div id="wrapper">
         <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <div class="show-access">
+                <li class="sidebar-user">
+                    <div class="show-access">
+                    <i class="fa-regular fa-circle-user"></i>
                     <?php
                     if (isset($_SESSION['UserLogin'])) {
                         if ($_SESSION['UserLogin'] === 'admin') {
@@ -54,19 +54,19 @@ $row = $students->fetch_assoc();
             </li>
             <li>
                 <a href="index.php" target="_self">
-                    <i class="fa fa-list"></i><em> Students List</em>
+                    <i class="fa-solid fa-table-list"></i><em> Students List</em>
                 </a>
             </li>
             <li>
                 <a href="settings.php" target="_self">
-                    <i class="fa fa-cogs"></i><em> Settings</em>
+                    <i class="fa-solid fa-gear"></i><em> Settings</em>
                 </a>
             </li>
             <li>
                 <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
-                    <a href="login.php">Log out</a>
+                    <a href="login.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
                 <?php } elseif(isset($_SESSION['Access']) && $_SESSION['Access'] == "guest") { ?>
-                    <a href="login.php">Log out</a>
+                    <a href="login.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
                 <?php } else { ?>
                     <a href="login.php">Log In</a>
                 <?php } ?>
@@ -76,24 +76,40 @@ $row = $students->fetch_assoc();
         <div id="page-content-wrapper">
             <div class="container-fluid">
                     <button class="menu-btn" id="menu-toggle">
-                        <span><i class="fa fa-bars"></i></span>
+                        <span><i class="fa-solid fa-bars-staggered"></i></span>
                     </button>
                 <div class="section-header">
-                    <h1>Students List <i class="fa fa-list"></i></h1>
+                    <h1>Students List <i class="fa-regular fa-rectangle-list"></i></h1>
                     <hr class="section-divider">
                 </div>
                 <div class="main-content">
                 <div class="table-controls">
                 <div class="search-tab">
-                    <form action="result.php" method="get">
-                        <input class="search-bar" type="text" name="search" id="searchstu" autocomplete="off" minlength="3" maxlength="20" required>
-                        <button class="search" type="submit">Search</button>
-                    </form>
+
+                <form class="search-form" action="result.php" method="get">
+                    <label for="search">
+                        <input placeholder="search student" type="text" name="search" id="searchstu" autocomplete="off" minlength="3" maxlength="15" required>
+                        <button type="submit" class="icon">
+                            <svg stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="swap-on">
+                                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                            <svg stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="swap-off">
+                                <path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                        </button>
+                        <button type="reset" class="close-btn">
+                            <svg viewBox="0 0 20 20" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg">
+                                <path clip-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </label>
+                </form>
+
                 </div>
                     <div class="table-con-action">
                     <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
                         <button class="btn">
-                            <a class="add" href="add.php">Add <i class="fa fa-plus"></i></a>
+                            <a class="add" href="add.php">Add <i class="fa-solid fa-user-plus"></i></a>
                         </button>
                     <?php } ?>
                     </div>
@@ -104,20 +120,20 @@ $row = $students->fetch_assoc();
                                     <th class="th hlrn">LRN</th>
                                     <th class="th hlname">Last name</th>
                                     <th class="th hfname">First name</th>
-                                    <th class="th hfname">Name Ext.</th>
                                     <th class="th hmname">Middle name</th>
+                                    <th class="th hlrn">Birthdate</th>
                                     <th class="th hgender">Gender</th>
                                     <?php if (isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
                                         <th class="th hdetails">Details</th>
-                                    <?php } ?>
+                                <?php } ?>
                                 </tr>
-                                <?php do { ?>
+                                    <?php do { ?>
                                     <tr class="row-list">
                                         <td class="td rlrn"><?php echo $row['lrn']; ?></td>
                                         <td class="td rlname"><?php echo $row['last_name']; ?></td>
                                         <td class="td rfname"><?php echo $row['first_name']; ?></td>
-                                        <td class="td rfname"><?php echo $row['name_ext']; ?></td>
                                         <td class="td rmname"><?php echo $row['middle_name']; ?></td>
+                                        <td class="td rlrn"><?php echo $row['birth_date']; ?></td>
                                         <td class="td rgender"><?php echo $row['gender']; ?></td>
                                         <?php if (isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
                                             <td class="td view rdetails">

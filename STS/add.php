@@ -46,8 +46,7 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/buttons.css">
     <title>Students Transcripts System</title>
@@ -57,8 +56,9 @@ if (isset($_POST['submit'])) {
 <div id="wrapper">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
-        <li class="sidebar-brand">
+        <li class="sidebar-user">
                 <div class="show-access">
+                <i class="fa-regular fa-circle-user"></i>
                     <?php
                     if (isset($_SESSION['UserLogin'])) {
                         if ($_SESSION['UserLogin'] === 'admin') {
@@ -79,19 +79,19 @@ if (isset($_POST['submit'])) {
             </li>
             <li>
                 <a href="index.php" target="_self">
-                    <i class="fa fa-list"></i><em> Students List</em>
+                    <i class="fa-solid fa-table-list"></i><em> Students List</em>
                 </a>
             </li>
             <li>
                 <a href="settings.php" target="_self">
-                    <i class="fa fa-cogs"></i><em> Settings</em>
+                    <i class="fa-solid fa-gear"></i><em> Settings</em>
                 </a>
             </li>
             <li>
                 <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
-                    <a href="login.php">Log out</a>
+                    <a href="login.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
                 <?php } elseif(isset($_SESSION['Access']) && $_SESSION['Access'] == "guest") { ?>
-                    <a href="login.php">Log out</a>
+                    <a href="login.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
                 <?php } else { ?>
                     <a href="login.php">Log In</a>
                 <?php } ?>
@@ -101,44 +101,46 @@ if (isset($_POST['submit'])) {
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <button class="menu-btn" id="menu-toggle">
-                <span><i class="fa fa-bars"></i></span>
+                <span><i class="fa-solid fa-bars-staggered"></i></span>
             </button>
             <div class="section-header">
-                    <h1>Students List <i class="fa fa-list"></i></h1>
+                    <h1>Add Student <i class="fa-solid fa-user-plus"></i></h1>
                     <hr class="section-divider">
             </div>
             <div class="main-content">
                 <button class="btn">
-                    <a href="index.php"><i class="fa fa-arrow-left"></i> Back</a>
+                    <a href="index.php"><i class="fa-solid fa-chevron-left"></i> Back</a>
                 </button>
                 <div class="table-container">
                     <div class="error-container<?php echo !empty($lrnError) ? ' active' : ''; ?>" id="errorContainer">
                     <span class="error-message"><?php echo $lrnError; ?></span>
-                    <span class="error-close" onclick="closeError()"><i class="material-icons">close</i></span>
+                    <span class="error-close" onclick="closeError()"><i class="fa-solid fa-xmark"></i></span>
                 </div>
                     <form action="" method="post">
                         <table class="table">
-                            <button class="btn" type="submit" name="submit">
-                                <a class="add" href="">Add <i class="fa fa-plus"></i></a>
+                            <button class="btn">
+                                <a class="add" href="add.php">Add <i class="fa-solid fa-user-plus"></i></a>
                             </button>
                             <tr>
                                 <th class="th " colspan="4">LEARNER INFORMATION</th>
                             </tr>
                             <tr>
-                                <td colspan="2">Learner Reference Number (LRN):</td>
-                                <td colspan="2" class="value"><input type="text" name="lrn" id="search" inputmode="numeric" pattern="[0-9]*" minlength="12" maxlength="12" autocomplete="off" required></td>
+                                <td colspan="1">LAST NAME: 
+                                    <input type="text" name="last_name" id="search" minlength="3" pattern="[A-Za-z\s]+" autocomplete="off"></td>
+                                </td>
+                                <td colspan="1">FIRST NAME:
+                                    <input type="text" name="first_name" id="search" minlength="3" pattern="[A-Za-z\s]+" autocomplete="off"></td>
+                                </td>
+                                <td colspan="1">NAME EXT. (Jr, I, II): 
+                                    <input type="text" name="name_ext" pattern="[A-Za-z\s]+" id="search" autocomplete="off"></td>
+                                </td>
+                                <td colspan="1">MIDDLE NAME:
+                                    <input type="text" name="middle_name" id="search" minlength="3" pattern="[A-Za-z\s]+" autocomplete="off"></td>
+                                </td>
                             </tr>
                             <tr>
-                                <td colspan="1">LAST NAME:</td>
-                                <td colspan="1" class="value"><input type="text" name="last_name" id="search" minlength="3" pattern="[A-Za-z\s]+" autocomplete="off" required></td>
-                                <td colspan="1">FIRST NAME:</td>
-                                <td colspan="1" class="value"><input type="text" name="first_name" id="search" minlength="3" pattern="[A-Za-z\s]+" autocomplete="off" required></td>
-                            </tr>
-                            <tr>
-                                <td colspan="1">NAME EXT. (Jr, I, II):</td>
-                                <td colspan="1" class="value"><input type="text" name="name_ext" pattern="[A-Za-z\s]+" id="search" autocomplete="off"></td>
-                                <td colspan="1">MIDDLE NAME:</td>
-                                <td colspan="1" class="value"><input type="text" name="middle_name" id="search" minlength="3" pattern="[A-Za-z\s]+" autocomplete="off"></td>
+                                <td colspan="4">Learner Reference Number (LRN):
+                                    <input type="text" name="lrn" id="search" inputmode="numeric" pattern="[0-9]*" minlength="12" maxlength="12" autocomplete="off" required></td>
                             </tr>
                             <tr>
                             <td colspan="1">Birthdate (mm/dd/yyyy):</td>
@@ -154,8 +156,6 @@ if (isset($_POST['submit'])) {
                                     </select>
                                 </td>
                             </tr>
-                        </table>
-                        <table class="table">
                             <tr>
                                 <th class="th " colspan="4">ELIGIBILITY FOR JHS ENROLMENT</th>
                             </tr>

@@ -39,9 +39,7 @@ if(isset($_POST['login'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Students Transcripts System</title>
@@ -75,7 +73,8 @@ if(isset($_POST['login'])) {
         <input type="checkbox" id="chk" aria-hidden="true">
 		<div class="login">
 			<form class="form" method="post">
-					<label class="login-text" for="chk" aria-hidden="true">Log in</label>                        <label class="label" for="username">Username:</label>
+					<label class="login-text" for="chk" aria-hidden="true">Log in</label>                        
+                    <label class="label" for="username">Username:</label>
                         <input class="input" required="" name="username" id="username" type="text">
                     <label class="label" for="password">Password:</label>
                         <input class="input" required="" name="password" id="password" type="password">
@@ -97,7 +96,7 @@ if(isset($_POST['login'])) {
         
     <div class="error-container<?php echo !empty($error) ? ' active' : ''; ?>" id="errorContainer">
         <span class="error-message"><?php echo $error; ?></span>
-        <span class="error-close" onclick="closeError()"><span class="material-symbols-outlined">close</span></span>
+        <span class="error-close" onclick="closeError()"><i class="fa-solid fa-xmark"></i></span>
     </div>
 
 </body>

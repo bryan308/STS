@@ -38,8 +38,7 @@ if(isset($_GET['ID'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/buttons.css">
     <title>Students Transcripts System</title>
@@ -48,8 +47,9 @@ if(isset($_GET['ID'])) {
 <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand">
+                <li class="sidebar-user">
                     <div class="show-access">
+                        <i class="fa-regular fa-circle-user"></i>
                         <?php
                         if (isset($_SESSION['UserLogin'])) {
                             if ($_SESSION['UserLogin'] === 'admin') {
@@ -70,19 +70,19 @@ if(isset($_GET['ID'])) {
                 </li>
                 <li>
                     <a href="index.php" target="_self">
-                        <i class="fa fa-list"></i><em> Students List</em>
+                        <i class="fa-solid fa-table-list"></i><em> Students List</em>
                     </a>
                 </li>
                 <li>
                     <a href="settings.php" target="_self">
-                        <i class="fa fa-cogs"></i><em> Settings</em>
+                        <i class="fa-solid fa-gear"></i><em> Settings</em>
                     </a>
                 </li>
                 <li>
                     <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
-                        <a href="login.php">Log out</a>
+                        <a href="login.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
                     <?php } elseif(isset($_SESSION['Access']) && $_SESSION['Access'] == "guest") { ?>
-                        <a href="login.php">Log out</a>
+                        <a href="login.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
                     <?php } else { ?>
                         <a href="login.php">Log In</a>
                     <?php } ?>
@@ -92,16 +92,16 @@ if(isset($_GET['ID'])) {
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <button class="menu-btn" id="menu-toggle">
-                    <span><i class="fa fa-bars"></i></span>
+                    <span><i class="fa-solid fa-bars-staggered"></i></span>
                 </button>
                 <div class="section-header">
-                    <h1><?php echo $row['first_name']; ?><span>'s Information</span> <i class="fa fa-info-circle"></i></h1>
+                    <h1><?php echo $row['first_name']; ?><span>'s Information</span> <i class="fa-solid fa-circle-info"></i></h1>
                     <hr class="section-divider">
                 </div>
                 <div class="main-content">
                     <div class="table-controls">
-                        <button class="btn"><a href="index.php"><i class="fa fa-arrow-left"></i> Back</a></button>
-                        <button class="btn"><a href="edit.php?ID=<?php echo $row['id']; ?>">Edit</a></button>
+                        <button class="btn"><a href="index.php"><i class="fa-solid fa-chevron-left"></i> Back</a></button>
+                        <button class="btn"><a href="edit.php?ID=<?php echo $row['id']; ?>"><i class="fa-solid fa-pen-to-square"></i> Edit</a></button>
                     </div>
                     <div class="table-container">
                         <table class="table">
@@ -137,17 +137,16 @@ if(isset($_GET['ID'])) {
                                     <?php endif; ?>
                                 </td>
                             </tr>
-                        </table>
-                        <table class="table">
                             <tr>
                                 <th class="th" colspan="4">ELIGIBILITY FOR JHS ENROLMENT</th>
                             </tr>
                             <tr>
-                                <td>Elementary School Completer:
-                                <input type="checkbox" name="elementary_completer">
+                                <td colspan="2">Elementary School Completer:
+                                    <input type="checkbox" name="">
                                 </td>
-                                <td colspan="1">General Average:</td>
-                                <td colspan="2"><input type="text" name="lrn" value="" readonly autocomplete="off"></td>
+                                <td colspan="1">General Average:
+                                    <input type="text" name="" value="" readonly autocomplete="off">
+                                </td>
                             </tr>
                             <tr>
                                 <td>Name of Elementary School:</td>

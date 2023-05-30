@@ -29,8 +29,7 @@ if ($search != '') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/buttons.css">
     <title>Students Transcripts System</title>
@@ -39,8 +38,9 @@ if ($search != '') {
 <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand">
+                <li class="sidebar-user">
                     <div class="show-access">
+                    <i class="fa-regular fa-circle-user"></i>
                         <?php
                         if (isset($_SESSION['UserLogin'])) {
                             if ($_SESSION['UserLogin'] === 'admin') {
@@ -61,19 +61,19 @@ if ($search != '') {
                 </li>
                 <li>
                     <a href="index.php" target="_self">
-                        <i class="fa fa-list"></i><em> Students List</em>
+                        <i class="fa-solid fa-table-list"></i><em> Students List</em>
                     </a>
                 </li>
                 <li>
                     <a href="settings.php" target="_self">
-                        <i class="fa fa-cogs"></i><em> Settings</em>
+                    <i class="fa-solid fa-gear"></i><em> Settings</em>
                     </a>
                 </li>
                 <li>
                     <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
-                        <a href="login.php">Log out</a>
+                        <a href="login.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
                     <?php } elseif(isset($_SESSION['Access']) && $_SESSION['Access'] == "guest") { ?>
-                        <a href="login.php">Log out</a>
+                        <a href="login.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
                     <?php } else { ?>
                         <a href="login.php">Log In</a>
                     <?php } ?>
@@ -83,28 +83,35 @@ if ($search != '') {
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <button class="menu-btn" id="menu-toggle">
-                    <span><i class="fa fa-bars"></i></span>
+                    <span><i class="fa-solid fa-bars-staggered"></i></span>
                 </button>
                 <div class="section-header">
                     <h1>Students List <i class="fa fa-list"></i></h1>
                     <hr class="section-divider">
-                </div>
+                </div> 
                 <div class="main-content">
                     <div class="table-controls">
                         <div class="search-tab">
-                            <form action="result.php" method="get">
-                                <input class="search-bar" type="text" name="search" id="searchstu" autocomplete="off" minlength="3" maxlength="20" required value="<?php echo $_GET['search'] ?>">
-                                <button class="btn" type="submit">Search</button>
-                                <button class="btn">
-                                    <a href="index.php"><i class="fa fa-arrow-left"></i> Back</a>
+                        <form class="search-form" action="result.php" method="get">
+                            <label for="search">
+                                <input placeholder="search student" type="text" name="search" id="searchstu" autocomplete="off" minlength="3" maxlength="15" value="<?php echo $_GET['search'] ?>">
+                                <button type="submit" class="icon">
+                                    <svg stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="swap-on">
+                                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linejoin="round" stroke-linecap="round"></path>
+                                    </svg>
+                                    <svg stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="swap-off">
+                                        <path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linejoin="round" stroke-linecap="round"></path>
+                                    </svg>
                                 </button>
-                            </form>
+                            </label>
+                        </form>
                         </div>
                         <div class="table-con-action">
-                            <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
-                                <button class="btn"><a class="add" href="add.php">Add <i class="fa fa-plus"></i></a>
+                        <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
+                            <button class="btn">
+                                <a class="add" href="add.php">Add <i class="fa-solid fa-user-plus"></i></a>
                             </button>
-                            <?php } ?>
+                        <?php } ?>
                         </div>
                     </div>
                     <div class="table-container">
@@ -114,6 +121,7 @@ if ($search != '') {
                             <th class="th hlname">Last name</th>
                             <th class="th hfname">First name</th>
                             <th class="th hmname">Middle name</th>
+                            <th class="th hmname">Birthdate</th>
                             <th class="th hgender">Gender</th>
                             <?php if (isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
                                 <th class="th hdetails">Details</th>
@@ -127,9 +135,10 @@ if ($search != '') {
                                         <td class="td rlname"><?php echo $row['last_name']; ?></td>
                                         <td class="td rfname"><?php echo $row['first_name']; ?></td>
                                         <td class="td rmname"><?php echo $row['middle_name']; ?></td>
+                                        <td class="td rmname"><?php echo $row['birth_date']; ?></td>
                                         <td class="td rgender"><?php echo $row['gender']; ?></td>
                                         <?php if (isset($_SESSION['Access']) && $_SESSION['Access'] == "administration"): ?>
-                                            <td class="td rdetails">
+                                            <td class="td view rdetails">
                                                 <a href="info.php?ID=<?php echo $row['id']; ?>">View</a>
                                             </td>
                                         <?php endif; ?>
@@ -137,16 +146,16 @@ if ($search != '') {
                                 <?php } while ($row = $students->fetch_assoc());
                             } else {
                                 if (isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") {
-                                    echo "<tr><td colspan='6' style='text-align: center;'>No records found. <i class='fa fa-exclamation-triangle' style='color: orange;'></i></td></tr>";
+                                    echo "<tr><td colspan='7' style='text-align: center;'>No records found. <i class='fa-solid fa-triangle-exclamation' style='color: orange;'></i></td></tr>";
                                 } else {
-                                    echo "<tr><td colspan='5' style='text-align: center;'>No records found. <i class='fa fa-exclamation-triangle' style='color: orange;'></i></td></tr>";
+                                    echo "<tr><td colspan='5' style='text-align: center;'>No records found. <i class='fa-solid fa-triangle-exclamation' style='color: orange;'></i></td></tr>";
                                 }
                             }
                         } else {
                             if (isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") {
-                                echo "<tr><td colspan='6' style='text-align: center;'>No records found. <i class='fa fa-exclamation-triangle' style='color: orange;'></i></td></tr>";
+                                echo "<tr><td colspan='7' style='text-align: center;'>No records found. <i class='fa-solid fa-triangle-exclamation' style='color: orange;'></i></td></tr>";
                             } else {
-                                echo "<tr><td colspan='5' style='text-align: center;'>No records found. <i class='fa fa-exclamation-triangle' style='color: orange;'></i></td></tr>";
+                                echo "<tr><td colspan='5' style='text-align: center;'>No records found. <i class='fa-solid fa-triangle-exclamation' style='color: orange;'></i>></td></tr>";
                             }
                         } ?>
                     </table>
