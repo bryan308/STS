@@ -1,8 +1,10 @@
+// Menu button trigger
 document.getElementById("menu-toggle").addEventListener("click", function (e) {
     e.preventDefault();
     document.getElementById("wrapper").classList.toggle("toggled");
 });
 
+// Confirmatin of students' info deletion
 function showDeleteConfirmation(id) {
     var confirmDialog = document.getElementById('confirmDialog');
     confirmDialog.style.display = 'block';
@@ -32,8 +34,7 @@ function deleteItem(id) {
     document.getElementById('deleteForm_' + id).submit();
 }
 
-// Function for birthday format validation
-
+// Function for birthday format validation in new list
 function validateBirthdate(input) {
     var birthdate = input.value;
     var pattern = /^\d{2}\/\d{2}\/\d{4}$/;

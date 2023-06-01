@@ -13,6 +13,8 @@ $sql = "SELECT * FROM students_list_old WHERE id = '$id'";
 $students = $con->query($sql) or die ($con->error);
 $row = $students->fetch_assoc();
 
+
+
 if(isset($_POST['submit'])) {
 
     $lrn = $_POST['lrn'];
@@ -272,6 +274,7 @@ if(isset($_POST['submit'])) {
                                     </td>
                                 </tr>
                             </table>
+                            <h2>Subjects</h2>
                             <table style="margin-top: 30px;" class="table">
                                 <tr>
                                     <th class="row-devide" colspan="5"></th>
@@ -314,7 +317,7 @@ if(isset($_POST['submit'])) {
                                 </tr>
                                 <tr class="trcenter">
                                     <td colspan="1">
-                                        <input type="text" name="curr_yr1_tbl1" id="" value="<?php echo $row['curr_yr1_tbl1'] ?>" autocomplete="off">
+                                        <input class="inputcenter" type="text" name="curr_yr1_tbl1" id="" value="<?php echo $row['curr_yr1_tbl1'] ?>" autocomplete="off">
                                     </td>
                                     <td colspan="1">
                                         <input type="text" name="subject1_tbl1" id="" value="<?php echo $row['subject1_tbl1'] ?>" autocomplete="off">
@@ -354,18 +357,19 @@ if(isset($_POST['submit'])) {
     </div>
 </div>
 </body>
+<script>
+    // LRN Option with or without 
+var withLrnSelect = document.getElementById('withLrnSelect');
+var lrnInput = document.getElementById('lrnInput');
+
+withLrnSelect.addEventListener('change', function() {
+    if (withLrnSelect.value === 'true') {
+        lrnInput.readOnly = false;
+    } else {
+        lrnInput.readOnly = true;
+    }
+});
+</script>
 <script src="js/clock.js"></script>
 <script src="js/script.js"></script>
-<script>
-    var withLrnSelect = document.getElementById('withLrnSelect');
-    var lrnInput = document.getElementById('lrnInput');
-
-    withLrnSelect.addEventListener('change', function() {
-        if (withLrnSelect.value === 'true') {
-            lrnInput.readOnly = false;
-        } else {
-            lrnInput.readOnly = true;
-        }
-    });
-</script>
 </html>

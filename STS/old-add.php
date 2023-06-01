@@ -5,14 +5,9 @@ include_once("connections/connection.php");
 $con = connection();
 
 if (isset($_POST['submit'])) {
-    $withLRN = $_POST['with_lrn']; // Get the selected LRN option
-
-    if ($withLRN == "With") {
-        $lrn = $_POST['lrn']; // Get the LRN value if "With" option is selected
-    } else {
-        $lrn = ""; // Set the LRN value as empty if "Without" option is selected
-    }
     
+    $lrn = $_POST['lrn'];
+    $withlrn = $_POST['with_lrn'];
     $citizenship = $_POST['citizenship'];
     $birthDate = $_POST['date_of_birth'];
     $placeBirth = $_POST['place_of_birth'];
@@ -35,7 +30,7 @@ if (isset($_POST['submit'])) {
     $actionTaken1table1 = $_POST['action_taken1_tbl1'];
     $creditsEarned1table1 = $_POST['credits_earned1_tbl1'];
 
-    $sql = "INSERT INTO `students_list_old` (`lrn`, `citizenship`, `date_of_birth`, `place_of_birth`, `gender`, `stu_address`, `school_year`, `gen_average`, `last_name`, `first_name`, `middle_name`, `guardian`, `occupation`, `inter_course_com`, `school_tbl1`, `class_as_tbl1`, `school_year_tbl1`, `curr_yr1_tbl1`, `subject1_tbl1`, `final_rating1_tbl1`, `action_taken1_tbl1`, `credits_earned1_tbl1`) VALUES ('$lrn', '$citizenship', '$birthDate', '$placeBirth', '$gender', '$address', '$schoolYear', '$generalAverage', '$lastName', '$firstName', '$middleName', '$guardian', '$occupation', '$interCourseComplete', '$schooltable1', '$classAstable1', '$schoolYeartable1', '$currentYearr1table1', '$subject1table1', '$finalRating1table1', '$actionTaken1table1', '$creditsEarned1table1')";
+    $sql = "INSERT INTO `students_list_old` (`lrn`, `with_lrn`, `citizenship`, `date_of_birth`, `place_of_birth`, `gender`, `stu_address`, `school_year`, `gen_average`, `last_name`, `first_name`, `middle_name`, `guardian`, `occupation`, `inter_course_com`, `school_tbl1`, `class_as_tbl1`, `school_year_tbl1`, `curr_yr1_tbl1`, `subject1_tbl1`, `final_rating1_tbl1`, `action_taken1_tbl1`, `credits_earned1_tbl1`) VALUES ('$lrn', '$withlrn', '$citizenship', '$birthDate', '$placeBirth', '$gender', '$address', '$schoolYear', '$generalAverage', '$lastName', '$firstName', '$middleName', '$guardian', '$occupation', '$interCourseComplete', '$schooltable1', '$classAstable1', '$schoolYeartable1', '$currentYearr1table1', '$subject1table1', '$finalRating1table1', '$actionTaken1table1', '$creditsEarned1table1')";
     
     $con->query($sql) or die($con->error);
 
@@ -135,12 +130,12 @@ if (isset($_POST['submit'])) {
                                 <tr>
                                     <td colspan="2" class="bold-letter">Last name: 
                                         <span class="value">
-                                            <input type="text" name="last_name" id="" autocomplete="off">
+                                            <input type="text" name="last_name" id="" autocomplete="off" required>
                                         </span>
                                     </td>
                                     <td colspan="2" class="bold-letter">First name: 
                                         <span class="value">
-                                            <input type="text" name="first_name" id="" autocomplete="off">
+                                            <input type="text" name="first_name" id="" autocomplete="off" required>
                                         </span>
                                     </td>
                                     <td colspan="1" class="bold-letter">Middle name: 
@@ -152,7 +147,7 @@ if (isset($_POST['submit'])) {
                                 <tr>
                                     <td colspan="1" class="bold-letter">Date of Birth: 
                                         <span class="value">
-                                            <input type="text" name="date_of_birth" id="" autocomplete="off">
+                                            <input type="text" name="date_of_birth" id="" autocomplete="off" required>
                                         </span>
                                     </td>
                                     <td colspan="2" class="bold-letter">Place of Birth: 
@@ -162,7 +157,7 @@ if (isset($_POST['submit'])) {
                                     </td>
                                     <td colspan="1" class="bold-letter">Citizenship: 
                                         <span class="value">
-                                            <input type="text" name="citizenship" id="" autocomplete="off">
+                                            <input type="text" name="citizenship" id="" autocomplete="off" required>
                                         </span>
                                     </td>
                                     <td colspan="1" class="bold-letter">Gender: 
@@ -182,12 +177,12 @@ if (isset($_POST['submit'])) {
                                     </td>
                                     <td colspan="1" class="bold-letter">School year: 
                                         <span class="value">
-                                            <input type="text" name="school_year" id="" autocomplete="off">
+                                            <input type="text" name="school_year" id="" autocomplete="off" required>
                                         </span>
                                     </td>
                                     <td colspan="1" class="bold-letter">General Average: 
                                         <span class="value">
-                                            <input type="text" name="gen_average" id="" autocomplete="off">
+                                            <input type="text" name="gen_average" id="" autocomplete="off" required>
                                         </span>
                                     </td>
                                 </tr>
@@ -210,17 +205,13 @@ if (isset($_POST['submit'])) {
                                         </span>
                                     </td>
                                     <td colspan="2" class="bold-letter">
-                                        <span class="value">
-                                        <select name="with_lrn" id="withLrnSelect" onchange="toggleLRNInput(this)">
-                                            <option value="With" <?php if (!empty($row['lrn'])) echo 'selected'; ?>>With</option>
-                                            <option value="Without" <?php if (empty($row['lrn'])) echo 'selected'; ?>>Without</option>
+                                        <select name="with_lrn" id="withLrnSelect">
+                                            <option value="true">With</option>
+                                            <option value="false">Without</option>
                                         </select>
                                         LRN:
-                                        <?php if (!empty($row['lrn'])) : ?>
-                                        <input type="text" name="lrn" id="lrnInput" maxlength="12" minlength="12" autocomplete="off" required>
-                                        <?php else : ?>
-                                        <input type="text" name="lrn" id="lrnInput" value="" maxlength="12" minlength="12" autocomplete="off" disabled>
-                                        <?php endif; ?>
+                                        <span class="value">
+                                            <input type="text" name="lrn" id="lrnInput" maxlength="12" minlength="12" autocomplete="off" required>
                                         </span>
                                     </td>
                                 </tr>
@@ -306,18 +297,6 @@ if (isset($_POST['submit'])) {
     </div>
 </div>
 </body>
-<script>
-function toggleLRNInput(selectElement) {
-    var lrnInput = document.getElementById("lrnInput");
-    if (selectElement.value === "With") {
-        lrnInput.disabled = false;
-        lrnInput.setAttribute("required", "required");
-    } else {
-        lrnInput.disabled = true;
-        lrnInput.removeAttribute("required");
-    }
-}
-</script>
 <script>
 function closeError() {
     document.getElementById('errorContainer').style.display = 'none';
