@@ -3,6 +3,6 @@
 session_start();
 unset($_SESSION['UserLogin']);
 unset($_SESSION['Access']);
-echo header("Location: index.php");
+echo header("Location: new-list.php");
 
 ?>

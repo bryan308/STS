@@ -14,3 +14,5 @@ function connection(){
         return $con;
     }
 }
+
+?>

@@ -43,13 +43,18 @@ $con = connection();
                 </div>
             </li>
             <li>
-                <a href="#0">
+                <a href="home.php">
                 <i class="fa fa-home"></i><em> Home</em>
                 </a>
             </li>
             <li>
-                <a href="index.php" target="_self">
-                    <i class="fa-solid fa-table-list"></i><em> Students List</em>
+                <a href="new-list.php" target="_self">
+                    <i class="fa-solid fa-table-list"></i><em> Students List New</em>
+                </a>
+            </li>
+            <li>
+                <a href="old-list.php" target="_self">
+                    <i class="fa-solid fa-table-list"></i><em> Students List Old</em>
                 </a>
             </li>
             <li>
@@ -70,15 +75,18 @@ $con = connection();
     </div>
     <div id="page-content-wrapper">
         <div class="container-fluid">
-            <button class="menu-btn" id="menu-toggle">
-                <span><i class="fa-solid fa-bars-staggered"></i></span>
-            </button>
+            <div class="top-section">
+                <button class="menu-btn" id="menu-toggle">
+                    <span><i class="fa-solid fa-bars-staggered"></i></span>
+                </button>
+                <div class="clock-container">
+                    <i class="fa-regular fa-calendar"></i><div id="clock"></div>
+                </div>
+            </div>
             <div class="section-header">
                 <h1>Settings <i class="fa fa-gear"></i></h1>
                 <hr class="section-divider">
             </div>
-            <button class="btn"><a href="index.php"><i class="fa-solid fa-chevron-left"></i> Back</a>
-            </button>
         <div class="settings-container">
             <div class="settings-table-head">
                 <h3 class="setting-head">Color Themes <i class="fa-solid fa-brush"></i>
@@ -130,6 +138,7 @@ $con = connection();
     </div>
 </div>
 </body>
+<script src="js/clock.js"></script>
 <script src="js/theme.js"></script>
 <script src="js/script.js"></script>
 </html>

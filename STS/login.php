@@ -23,7 +23,7 @@ if(isset($_POST['login'])) {
         $_SESSION['UserLogin'] = $row['username'];
         $_SESSION['Access'] = $row['access'];
         
-        header("Location: index.php");
+        header("Location: home.php");
         exit();
 
     }else{

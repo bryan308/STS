@@ -13,20 +13,27 @@
     width: 10px; /* width of the scrollbar */
 }
 
-  /* Track */
+/* Track */
 ::-webkit-scrollbar-track {
     background: #d0ff9b; /* color of the track */
 }
 
-  /* Handle */
+/* Handle */
 ::-webkit-scrollbar-thumb {
     background: #393939; /* color of the scrollbar handle */
     border-radius: 10px;
+    transition: opacity 0.3s ease-in-out; /* transition for opacity */
 }
 
-  /* Handle on hover */
+/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #288d00; /* color of the scrollbar handle on hover */
+}
+
+/* Lower opacity of scrollbar when not active */
+::-webkit-scrollbar-thumb:active,
+::-webkit-scrollbar-thumb:hover {
+    opacity: 0.8; /* lower opacity when not active */
 }
 
 
@@ -48,9 +55,9 @@
     --secondary-text: #242522db;
     --text-color: #252422ab;
 
-    --white-1: #f5f5f5;
+    --white-1: #ffffff;
 
-    --color-1: #F8FFCA;
+    --color-1: #f5f5f5;
     --color-2: #B6D084;
     --color-3: #FFD046;
     --color-4: #FFCB32;
@@ -64,7 +71,7 @@
 
     --shadow-below: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     
-    --norm-shadow: 5px 4px 8px #cecece;
+    --norm-shadow: 5px 4px 8px #2121213c;
 
     --font-size-h1: 7.451rem; /* 119.21px */
     --font-size-h2: 5.96rem; /* 95.37px */
@@ -263,6 +270,30 @@ button {
     }
 }
 
+.top-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* clock */
+.clock-container {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    width: 300px; /* Set a fixed width for the clock container */
+}
+
+#clock {
+    font-family: 'Inter';
+    margin-left: 10px;
+    color: #212121;
+    font-size: 14px;
+    letter-spacing: .5px;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+
 /* page content wrapper */
 .section-header {
     margin-top: 20px;
@@ -280,7 +311,7 @@ button {
 .main-content {
     padding: 10px;
     border-radius: 5px;
-    background: #ffffff;
+    background: var(--white-1);
     box-shadow: 0 2.8px 2.2px rgba(0,0,0,.02), 0 6.7px 5.3px rgba(0,0,0,.028), 0 12.5px 10px rgba(0,0,0,.035), 0 22.3px 17.9px rgba(0,0,0,.042), 0 41.8px 23.4px rgba(0,0,0,.05), 0 10px 10px rgba(0,0,0,.07);
 }
 
@@ -319,33 +350,26 @@ button {
     z-index: var(--layer-2);
 }
 
-.tr {
-    display: flex;
-}
-
 td {
     padding: 5px;
-    text-align: left;
     border: 1px solid #acacac;
     border-radius: 3px;
     vertical-align: middle;
     white-space: nowrap; /* Prevent line breaks within table cells */
     overflow: hidden; /* Hide overflowing content */
-    text-overflow: ellipsis; /* Show ellipsis (...) for overflowing content */
 }
 
 .row-list:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-input {
+input[type="text"] {
     height: 100%;
     padding: 5px;
     border: none;
     vertical-align: middle;
     box-sizing: border-box;
-    text-overflow: ellipsis;
-    width: 33%; /* Make the input fill the available width within the table cell */
+    width: 40%; /* Make the input fill the available width within the table cell */
 }
 
 input,
@@ -353,6 +377,21 @@ select {
     font-family: var(--font-family);
     outline: none;
     font-size: 16px;
+}
+
+.bold-letter {
+    font-weight: 600;
+}
+
+.value {
+    font-weight: 400;
+}
+
+.row-devide {
+    border: 1px solid #696969;
+    border-radius: 3px;
+    padding: 5px;
+    background: var(--color-4);
 }
 
 /* search bar */
@@ -480,7 +519,17 @@ select {
     transition: 0s;
 }
 
+.birthdate {
+    position: relative;
+}
 
+.birth-error {
+    font-size: 12px;
+    color: red;
+    position: absolute;
+    right: 364px;
+    top: 19.8rem;
+}
 
 .error-container { /* Error message */
     position: fixed;
@@ -640,6 +689,7 @@ select {
     width: 100px;
     text-align: center;
 }
+
 .hgender {
     width: 100px;
     text-align: center;
@@ -652,8 +702,11 @@ select {
     text-align: center;
 }
 
-
-
+.thcenter,
+.trcenter,
+.tdcenter {
+    text-align: center;
+}
 
 /* Edit section */
 

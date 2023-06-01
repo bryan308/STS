@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Student Information</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h2>Edit Student Information</h2>
+        <form method="POST" action="process.php">
+            <table id="subject-table">
+                <thead>
+                    <tr>
+                        <th>Current Year</th>
+                        <th>Subject</th>
+                        <th>Final Rating</th>
+                        <th>Action Taken</th>
+                        <th>Credits Earned</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="current_year[]" value="I"></td>
+                        <td><input type="text" name="subject[]" value="Math"></td>
+                        <td><input type="text" name="rating[]" value="A"></td>
+                        <td><input type="text" name="action[]" value="Passed"></td>
+                        <td><input type="text" name="credits[]" value="3"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="current_year[]" value="I"></td>
+                        <td><input type="text" name="subject[]" value="Science"></td>
+                        <td><input type="text" name="rating[]" value="B"></td>
+                        <td><input type="text" name="action[]" value="Passed"></td>
+                        <td><input type="text" name="credits[]" value="4"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button type="button" id="add-subject-btn">Add Subject</button>
+            <button type="submit" name="submit">Save Changes</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var addSubjectBtn = document.getElementById('add-subject-btn');
+            addSubjectBtn.addEventListener('click', addSubjectRow); 
+
+            function addSubjectRow() {
+                var subjectTable = document.getElementById('subject-table');
+                var tbody = subjectTable.querySelector('tbody');
+
+                var currentRowCount = tbody.children.length;
+
+                // Create a new row and append cells
+                var newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td><input type="text" name="current_year[]" value=""></td>
+                    <td><input type="text" name="subject[]" value=""></td>
+                    <td><input type="text" name="rating[]" value=""></td>
+                    <td><input type="text" name="action[]" value=""></td>
+                    <td><input type="text" name="credits[]" value=""></td>
+                `;
+
+                // Append the new row to the table body
+                tbody.appendChild(newRow);
+            }
+        });
+    </script>
+</body>
+</html>
