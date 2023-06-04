@@ -1,5 +1,5 @@
-// Get the theme radio buttons
-const radioButtons = document.querySelectorAll('.theme-radio .radio');
+        // Get the theme radio buttons
+        const radioButtons = document.querySelectorAll('.theme-radio .radio');
 
 // Function to handle theme change
 function handleThemeChange() {

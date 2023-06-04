@@ -17,7 +17,7 @@ $con = connection();
 $search = $_GET['search'];
 
 if ($search != '') {
-    $sql = "SELECT * FROM students_list_old WHERE first_name LIKE '%$search%' OR lrn LIKE '%$search%' OR last_name LIKE '%$search%' ORDER BY id DESC";
+    $sql = "SELECT * FROM students_list_old WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' ORDER BY id DESC";
     $students = $con->query($sql) or die($con->error);
     $row = $students->fetch_assoc();
 }
@@ -30,6 +30,9 @@ if ($search != '') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/blue.css">
+    <link rel="stylesheet" href="css/dark.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/buttons.css">
     <title>Students Transcripts System</title>

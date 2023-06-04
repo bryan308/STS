@@ -11,26 +11,12 @@ if (isset($_GET['ID'])) {
     $id = $_GET['ID'];
 
     $sql = "SELECT * FROM students_list_old WHERE id = '$id'";
-    
-    $result = $con->query($sql) or die ($con->error);
-    $row = $result->fetch_assoc();
-    
-    $sqlSubjects = "SELECT * FROM students_subjects_old WHERE id = '$id'";
-    
-    $resultSubjects = $con->query($sqlSubjects) or die ($con->error);
-    $rowSubjects = $resultSubjects->fetch_assoc();
-    
-    $table1_subject = "";
-    $table1_final_remark = "";
-    
-    if (!empty($rowSubjects)) {
-        $table1_subject = $rowSubjects['table1_subject'];
-        $table1_final_remark = $rowSubjects['table1_final_remark'];
-    } else {
-        $table1_subject = "N/A";
-        $table1_final_remark = "N/A";
-    }    
+    $students = $con->query($sql) or die($con->error);
+    $row = $students->fetch_assoc();
+
 } else {
+    // Handle the case when 'ID' parameter is not set
+    // For example, redirect to another page or display an error message
     header("Location: old-list.php");
     exit;
 }
@@ -44,9 +30,6 @@ if (isset($_GET['ID'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/default.css">
-    <link rel="stylesheet" href="css/blue.css">
-    <link rel="stylesheet" href="css/dark.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/buttons.css">
     <title>Students Transcripts System</title>
@@ -149,6 +132,16 @@ if (isset($_GET['ID'])) {
                                         <?php echo $row['date_of_birth'] ?>
                                     </span>
                                 </td>
+                                <td colspan="2" class="bold-letter">Place of Birth: 
+                                    <span class="value">
+                                        <?php echo $row['place_of_birth'] ?>
+                                    </span>
+                                </td>
+                                <td colspan="1" class="bold-letter">Citizenship: 
+                                    <span class="value">
+                                        <?php echo $row['citizenship'] ?>
+                                    </span>
+                                </td>
                                 <td colspan="1" class="bold-letter">Gender: 
                                     <span class="value">
                                         <?php if ($row['gender'] === 'Male'): ?>
@@ -159,17 +152,40 @@ if (isset($_GET['ID'])) {
                                     </span>
                                 </td>
                             </tr>
-                        </table>
-                        <table class="table">
                             <tr>
-                                <th colspan="5" class="row-divide"></th>
+                                <td colspan="3" class="bold-letter">Address: 
+                                    <span class="value">
+                                        <?php echo $row['stu_address'] ?>
+                                    </span>
+                                </td>
+                                <td colspan="1" class="bold-letter">School year: 
+                                    <span class="value">
+                                        <?php echo $row['school_year'] ?>
+                                    </span>
+                                </td>
+                                <td colspan="1" class="bold-letter">General Average: 
+                                    <span class="value">
+                                        <?php echo $row['gen_average'] ?>
+                                    </span>
+                                </td>
                             </tr>
                             <tr>
-                                <td colspan="2">Subject:
-                                    <?php echo $table1_subject ?>
+                                <td colspan="3" class="bold-letter">Guardian: 
+                                    <span class="value">
+                                        <?php echo $row['guardian'] ?>
+                                    </span>
                                 </td>
-                                <td colspan="1">Final Remark:
-                                    <?php echo $table1_final_remark ?>
+                                <td colspan="2" class="bold-letter">Occupation: 
+                                    <span class="value">
+                                        <?php echo $row['occupation'] ?>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="bold-letter">Intermediate Course Completed: 
+                                    <span class="value">
+                                        <?php echo $row['inter_course_com'] ?>
+                                    </span>
                                 </td>
                             </tr>
                         </table>

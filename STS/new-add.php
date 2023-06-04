@@ -1,20 +1,13 @@
 <?php
-
 session_start();
 
 include_once("connections/connection.php");
 $con = connection();
 
-// Initialize variables
-$lrn = "";
-$lname = "";
-$fname = "";
-$mname = "";
 $birthd = "";
-$gender = "";
-$lrnError = "";
 
 if (isset($_POST['submit'])) {
+    
     $lrn = $_POST['lrn'];
     $lname = $_POST['last_name'];
     $fname = $_POST['first_name'];
@@ -32,7 +25,7 @@ if (isset($_POST['submit'])) {
     } else {
         // LRN doesn't exist, insert the new record
         $sql = "INSERT INTO `students_list_new`(`lrn`, `last_name`, `first_name`, `middle_name`, `gender`, `birth_date`) VALUES ('$lrn','$lname','$fname','$mname','$gender','$birthd')";
-        $con->query($sql) or die($con->error);
+        $con->query($sql) or die ($con->error);
 
         header("Location: new-list.php");
         exit;
@@ -47,6 +40,9 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/blue.css">
+    <link rel="stylesheet" href="css/dark.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/buttons.css">
     <title>Students Transcripts System</title>
@@ -143,7 +139,7 @@ if (isset($_POST['submit'])) {
                                     <input type="text" name="name_ext" pattern="[A-Za-z\s]+" id="search" autocomplete="off"></td>
                                 </td>
                                 <td colspan="1">MIDDLE NAME:
-                                    <input type="text" name="middle_name" id="search" minlength="3" pattern="[A-Za-z\s]+" autocomplete="off"></td>
+                                    <input type="text" name="middle_name" id="search" pattern="[A-Za-z\s]+" autocomplete="off"></td>
                                 </td>
                             </tr>
                             <tr>

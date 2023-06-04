@@ -1,6 +1,6 @@
 <?php
 
-function connection() {
+function connection(){
     $host = "localhost";
     $username = "root";
     $password = "";
@@ -8,11 +8,11 @@ function connection() {
 
     $con = new mysqli($host, $username, $password, $database);
 
-    if ($con->connect_errno) {
-        throw new Exception("Failed to connect to MySQL: " . $con->connect_error);
+    if ($con->connect_error){
+        echo $con->connect_error;
+    }else{
+        return $con;
     }
-
-    return $con;
 }
 
 ?>

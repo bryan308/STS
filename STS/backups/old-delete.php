@@ -12,13 +12,9 @@ if(isset($_POST['delete'])) {
     $con->query($deleteStudentSql) or die ($con->error);
 
     // Delete from old_subjects_list
-    $deleteIDSql = "DELETE FROM student_id_trig WHERE id = '$id'";
-    $con->query($deleteIDSql) or die ($con->error);
-    
-    // Delete from students_subjects_old
-    $deleteSubjectsSql = "DELETE FROM students_subjects_old WHERE id = '$id'";
+    $deleteSubjectsSql = "DELETE FROM old_subjects_list WHERE id = '$id'";
     $con->query($deleteSubjectsSql) or die ($con->error);
-    
+
     header("Location: old-list.php");
     exit;
 }

@@ -17,7 +17,7 @@ $con = connection();
 $search = $_GET['search'];
 
 if ($search != '') {
-    $sql = "SELECT * FROM students_list_new WHERE first_name LIKE '%$search%' OR lrn LIKE '%$search%' OR last_name LIKE '%$search%' ORDER BY id DESC";
+    $sql = "SELECT * FROM students_list_old WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' ORDER BY id DESC";
     $students = $con->query($sql) or die($con->error);
     $row = $students->fetch_assoc();
 }
@@ -30,9 +30,6 @@ if ($search != '') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/default.css">
-    <link rel="stylesheet" href="css/blue.css">
-    <link rel="stylesheet" href="css/dark.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/buttons.css">
     <title>Students Transcripts System</title>
@@ -105,7 +102,7 @@ if ($search != '') {
                 <div class="main-content">
                     <div class="table-controls">
                         <div class="search-tab">
-                        <form class="search-form" action="new-result.php" method="get">
+                        <form class="search-form" action="old-result.php" method="get">
                             <label for="search">
                                 <input placeholder="search student" type="text" name="search" id="searchstu" autocomplete="off" minlength="3" maxlength="15" value="<?php echo $_GET['search'] ?>">
                                 <button type="submit" class="icon">
@@ -122,7 +119,7 @@ if ($search != '') {
                         <div class="table-con-action">
                         <?php if(isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
                             <button class="btn">
-                                <a class="add" href="new-add.php">Add <i class="fa-solid fa-user-plus"></i></a>
+                                <a class="add" href="old-add.php">Add <i class="fa-solid fa-user-plus"></i></a>
                             </button>
                         <?php } ?>
                         </div>
@@ -130,11 +127,11 @@ if ($search != '') {
                     <div class="table-container">
                     <table class="table">
                         <tr>
-                            <th class="th hlrn">LRN</th>
-                            <th class="th hlname">Last name</th>
-                            <th class="th hfname">First name</th>
-                            <th class="th hmname">Middle name</th>
-                            <th class="th hmname">Birthdate</th>
+                            <th class="th hlrn">Last name</th>
+                            <th class="th hlname">First name</th>
+                            <th class="th hfname">Middle name</th>
+                            <th class="th hmname">Birth Date</th>
+                            <th class="th hmname">School Year</th>
                             <th class="th hgender">Gender</th>
                             <?php if (isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") { ?>
                                 <th class="th hdetails">Details</th>
@@ -144,15 +141,15 @@ if ($search != '') {
                             if ($students->num_rows > 0) {
                                 do { ?>
                                     <tr>
-                                        <td class="td rlrn"><?php echo $row['lrn']; ?></td>
-                                        <td class="td rlname"><?php echo $row['last_name']; ?></td>
-                                        <td class="td rfname"><?php echo $row['first_name']; ?></td>
-                                        <td class="td rmname"><?php echo $row['middle_name']; ?></td>
-                                        <td class="td rmname"><?php echo $row['birth_date']; ?></td>
-                                        <td class="td rgender"><?php echo $row['gender']; ?></td>
+                                        <td class="td "><?php echo $row['last_name']; ?></td>
+                                        <td class="td "><?php echo $row['first_name']; ?></td>
+                                        <td class="td "><?php echo $row['middle_name']; ?></td>
+                                        <td class="td "><?php echo $row['date_of_birth']; ?></td>
+                                        <td class="td tdcenter"><?php echo $row['school_year']; ?></td>
+                                        <td class="td tdcenter"><?php echo $row['gender']; ?></td>
                                         <?php if (isset($_SESSION['Access']) && $_SESSION['Access'] == "administration"): ?>
                                             <td class="td view rdetails">
-                                                <a href="new-info.php?ID=<?php echo $row['id']; ?>">View</a>
+                                                <a href="old-info.php?ID=<?php echo $row['id']; ?>">View</a>
                                             </td>
                                         <?php endif; ?>
                                     </tr>
@@ -161,14 +158,14 @@ if ($search != '') {
                                 if (isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") {
                                     echo "<tr><td colspan='7' style='text-align: center;'>No records found. <i class='fa-solid fa-triangle-exclamation' style='color: orange;'></i></td></tr>";
                                 } else {
-                                    echo "<tr><td colspan='6' style='text-align: center;'>No records found. <i class='fa-solid fa-triangle-exclamation' style='color: orange;'></i></td></tr>";
+                                    echo "<tr><td colspan='5' style='text-align: center;'>No records found. <i class='fa-solid fa-triangle-exclamation' style='color: orange;'></i></td></tr>";
                                 }
                             }
                         } else {
                             if (isset($_SESSION['Access']) && $_SESSION['Access'] == "administration") {
                                 echo "<tr><td colspan='7' style='text-align: center;'>No records found. <i class='fa-solid fa-triangle-exclamation' style='color: orange;'></i></td></tr>";
                             } else {
-                                echo "<tr><td colspan='6' style='text-align: center;'>No records found. <i class='fa-solid fa-triangle-exclamation' style='color: orange;'></i>></td></tr>";
+                                echo "<tr><td colspan='5' style='text-align: center;'>No records found. <i class='fa-solid fa-triangle-exclamation' style='color: orange;'></i>></td></tr>";
                             }
                         } ?>
                     </table>
